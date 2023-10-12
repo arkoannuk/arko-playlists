@@ -23,7 +23,16 @@
           />
           <label for="loginPassword">Password</label>
         </div>
-        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        <button class="btn btn-primary w-100 py-2" type="submit" v-if="!isPending">
+          Sign in
+        </button>
+        <button
+          class="btn btn-primary w-100 py-2 disabled"
+          type="submit"
+          v-if="isPending"
+        >
+          Loading
+        </button>
 
         <div class="text-center form-text text-danger user-select-none" role="alert">
           {{ errorText }}
@@ -40,7 +49,7 @@ import { ref } from 'vue'
 const errorText = ref(' ')
 const email = ref('arkoannuk@gmail.com')
 const password = ref('arkoannuk')
-const { error, login } = useLogin()
+const { error, isPending, login } = useLogin()
 
 async function handleSubmit() {
   await login(email.value, password.value)
