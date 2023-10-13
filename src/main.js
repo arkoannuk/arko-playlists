@@ -1,4 +1,5 @@
 import './assets/main.scss'
+import './assets/color-modes.js'
 // eslint-disable-next-line no-unused-vars
 import * as bootstrap from 'bootstrap'
 

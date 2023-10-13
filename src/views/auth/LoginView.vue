@@ -2,7 +2,7 @@
   <div class="container d-flex justify-content-center align-items-center">
     <main class="form-signin w-100">
       <form @submit.prevent="handleSubmit">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 fw-normal">Please log in</h1>
         <div class="form-floating">
           <input
             type="email"
@@ -24,7 +24,7 @@
           <label for="loginPassword">Password</label>
         </div>
         <button class="btn btn-primary w-100 py-2" type="submit" v-if="!isPending">
-          Sign in
+          Log in
         </button>
         <button
           class="btn btn-primary w-100 py-2 disabled"
