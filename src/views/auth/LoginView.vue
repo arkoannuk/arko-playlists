@@ -1,5 +1,5 @@
 <template>
-  <div class="vh-100 container d-flex justify-content-center align-items-center">
+  <div class="container d-flex justify-content-center align-items-center">
     <main class="form-signin w-100">
       <form @submit.prevent="handleSubmit">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
@@ -64,7 +64,7 @@ async function handleSubmit() {
 
 <style scoped>
 .form-signin {
-  max-width: 330px;
+  max-width: 360px;
 }
 .form-signin input[type='email'] {
   margin-bottom: -1px;
