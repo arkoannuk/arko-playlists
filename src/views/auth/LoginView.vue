@@ -37,8 +37,8 @@
           <span role="status ms-2">Loading...</span>
         </button>
 
-        <div class="text-center form-text text-danger user-select-none" role="alert">
-          {{ errorText }}
+        <div class="text-center form-text text-danger" role="alert" v-if="error">
+          {{ error }}
         </div>
       </form>
     </main>
@@ -51,7 +51,6 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
 const router = useRouter()
-const errorText = ref(' ')
 const email = ref('arkoannuk@gmail.com')
 const password = ref('arkoannuk')
 const { error, isPending, login } = useLogin()
@@ -59,11 +58,8 @@ const { error, isPending, login } = useLogin()
 async function handleSubmit() {
   await login(email.value, password.value)
   if (!error.value) {
-    errorText.value = ' '
     console.log('user logged in')
     router.push({ name: 'Home' })
-  } else {
-    errorText.value = error.value
   }
 }
 </script>

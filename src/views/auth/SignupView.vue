@@ -41,15 +41,15 @@
         </button>
         <button
           class="btn btn-primary w-100 py-2 disabled"
-          type="submit"
+          type="button"
           v-if="isPending"
         >
           <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
           <span role="status ms-2">Loading...</span>
         </button>
 
-        <div class="text-center form-text text-danger user-select-none" role="alert">
-          {{ errorText }}
+        <div class="text-center form-text text-danger" role="alert" v-if="error">
+          {{ error }}
         </div>
       </form>
     </main>
@@ -62,7 +62,6 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
 const router = useRouter()
-const errorText = ref(' ')
 const username = ref('arkoannuk')
 const email = ref('arkoannuk@gmail.com')
 const password = ref('arkoannuk')
@@ -71,11 +70,8 @@ const { error, isPending, signup } = useSignup()
 async function handleSubmit() {
   await signup(email.value, password.value, username.value)
   if (!error.value) {
-    errorText.value = ' '
     console.log('user signed up')
     router.push({ name: 'Home' })
-  } else {
-    errorText.value = error.value
   }
 }
 </script>
