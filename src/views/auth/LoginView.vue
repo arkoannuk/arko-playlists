@@ -1,5 +1,5 @@
 <template>
-  <div class="container d-flex justify-content-center align-items-center">
+  <div class="container d-flex justify-content-center pt-5 mt-5">
     <main class="form-signin w-100">
       <form @submit.prevent="handleSubmit">
         <h1 class="h3 mb-3 fw-normal">Please log in</h1>
@@ -9,6 +9,7 @@
             class="form-control"
             id="loginEmail"
             placeholder=""
+            required
             v-model="email"
           />
           <label for="loginEmail">Email address</label>
@@ -19,6 +20,7 @@
             class="form-control mb-2"
             id="loginPassword"
             placeholder=""
+            required
             v-model="password"
           />
           <label for="loginPassword">Password</label>
@@ -28,10 +30,11 @@
         </button>
         <button
           class="btn btn-primary w-100 py-2 disabled"
-          type="submit"
+          type="button"
           v-if="isPending"
         >
-          Loading
+          <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+          <span role="status ms-2">Loading...</span>
         </button>
 
         <div class="text-center form-text text-danger user-select-none" role="alert">
@@ -44,8 +47,10 @@
 
 <script setup>
 import useLogin from '@/composables/useLogin'
+import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
+const router = useRouter()
 const errorText = ref(' ')
 const email = ref('arkoannuk@gmail.com')
 const password = ref('arkoannuk')
@@ -56,6 +61,7 @@ async function handleSubmit() {
   if (!error.value) {
     errorText.value = ' '
     console.log('user logged in')
+    router.push({ name: 'Home' })
   } else {
     errorText.value = error.value
   }
@@ -65,6 +71,9 @@ async function handleSubmit() {
 <style scoped>
 .form-signin {
   max-width: 360px;
+}
+.form-signin .form-floating:focus-within {
+  z-index: 2;
 }
 .form-signin input[type='email'] {
   margin-bottom: -1px;
