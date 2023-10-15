@@ -60,7 +60,6 @@ const { logout } = useLogout()
 async function handleClick() {
   await logout()
   console.log('user logged out')
-  console.log(getUser())
   router.push({ name: 'Home' })
 }
 </script>

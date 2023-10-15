@@ -100,7 +100,7 @@ function handleChange(e) {
     file.value = null
     fileError.value = 'please select an image file (.png .jpg .svg)'
   }
-  console.log(file.value)
+  // console.log(file.value)
 }
 
 async function handleSubmit() {
