@@ -1,14 +1,17 @@
 import './assets/main.scss'
-import './assets/color-modes.js'
+import initThemeSwitcher from './assets/themeSwitcher'
+// import './assets/color-modes.js'
 // eslint-disable-next-line no-unused-vars
 import * as bootstrap from 'bootstrap'
-
+import { projectAuth } from './firebase/config'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
-
-app.use(router)
-
-app.mount('#app')
+let app
+projectAuth.onAuthStateChanged(() => {
+  if (!app) {
+    app = createApp(App).use(router).mount('#app')
+    initThemeSwitcher()
+  }
+})

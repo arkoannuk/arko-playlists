@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-md bg-body-secondary border-bottom">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Arko Playlists</a>
+      <RouterLink class="navbar-brand" :to="{ name: 'Home' }">Arko Playlists</RouterLink>
       <button
         class="navbar-toggler"
         type="button"

@@ -107,7 +107,7 @@ async function handleSubmit() {
   if (file.value) {
     isPending.value = true
     await uploadImage(file.value)
-    await addDoc({
+    const res = await addDoc({
       title: title.value,
       description: description.value,
       userId: user.value.uid,
@@ -120,7 +120,8 @@ async function handleSubmit() {
     isPending.value = false
     if (!error.value) {
       console.log('playlist added')
-      router.push({ name: 'Home' })
+      console.log(res)
+      router.push({ name: 'PlaylistDetails', params: { id: res.id } })
     }
   }
 }

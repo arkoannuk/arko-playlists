@@ -1,11 +1,11 @@
-import { ref, watchEffect } from "vue"
-import { projectFirestore } from "../firebase/config"
+import { ref, watchEffect } from 'vue'
+import { projectFirestore } from '../firebase/config'
 
 function getCollection(collection) {
   const error = ref(null)
   const documents = ref([])
 
-  const collectionRef = projectFirestore.collection(collection).orderBy("createdAt")
+  const collectionRef = projectFirestore.collection(collection).orderBy('createdAt')
 
   const unsub = collectionRef.onSnapshot(
     (snap) => {
@@ -21,7 +21,7 @@ function getCollection(collection) {
     (err) => {
       console.log(err.message)
       documents.value = null
-      error.value = "Could not fetch data"
+      error.value = 'could not fetch data'
     }
   )
 
