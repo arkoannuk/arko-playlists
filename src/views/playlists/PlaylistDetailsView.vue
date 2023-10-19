@@ -35,6 +35,7 @@
           </div>
         </div>
       </div>
+      <AddSong :playlist="playlist" @submit="toggleModal" />
     </div>
   </div>
 
@@ -44,7 +45,13 @@
     style="padding-left: 12px"
   >
     <div class="d-flex gap-2 justify-content-start justify-content-md-center">
-      <button class="btn btn-success" style="min-width: 98px">
+      <button
+        class="btn btn-success"
+        style="min-width: 98px"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        @click="showPopup"
+      >
         <i class="bi bi-music-note"></i> Add
       </button>
       <button class="btn btn-danger py-2" style="min-width: 98px" @click="handleDelete">
@@ -60,14 +67,25 @@ import getDocument from '@/composables/getDocument'
 import useDocument from '@/composables/useDocument'
 import useStorage from '@/composables/useStorage'
 import getUser from '@/composables/getUser'
-import { computed } from 'vue'
+import AddSong from '../../components/AddSong.vue'
+import { computed, onMounted, ref } from 'vue'
+import * as bootstrap from 'bootstrap'
 
+const myModal = ref(null)
 const router = useRouter()
 const props = defineProps(['id'])
 const { user } = getUser()
 const { error, document: playlist } = getDocument('playlists', props.id)
 const { deleteDoc } = useDocument('playlists', props.id)
 const { deleteImage } = useStorage()
+
+onMounted(() => {
+  myModal.value = new bootstrap.Modal(document.getElementById('exampleModal'))
+})
+
+function toggleModal() {
+  myModal.value.toggle()
+}
 
 const ownership = computed(() => {
   return playlist.value && user.value && user.value.uid === playlist.value.userId

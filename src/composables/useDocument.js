@@ -20,7 +20,23 @@ function useDocument(collection, id) {
       error.value = 'could not delete the document'
     }
   }
-  return { error, isPending, deleteDoc }
+
+  async function updateDoc(updates) {
+    isPending.value = true
+    error.value = null
+
+    try {
+      const res = await docRef.update(updates)
+      isPending.value = false
+      return res
+    } catch (err) {
+      console.log(err.message)
+      isPending.value = false
+      error.value = 'could not update the document'
+    }
+  }
+
+  return { error, isPending, deleteDoc, updateDoc }
 }
 
 export default useDocument
