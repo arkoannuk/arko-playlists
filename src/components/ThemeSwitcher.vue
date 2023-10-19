@@ -1,5 +1,8 @@
 <template>
-  <div class="dropdown position-fixed bottom-0 end-0 mb-2 me-2 bd-mode-toggle">
+  <div
+    class="dropdown position-fixed bottom-0 end-0 mb-2 bd-mode-toggle"
+    style="padding-right: 12px"
+  >
     <button
       class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center"
       id="bd-theme"

@@ -13,7 +13,7 @@ function getDocument(collection, id) {
         document.value = { ...snap.data(), id: snap.id }
         error.value = null
       } else {
-        error.value = 'that document does not exist'
+        error.value = 'this document does not exist'
       }
     },
     (err) => {
