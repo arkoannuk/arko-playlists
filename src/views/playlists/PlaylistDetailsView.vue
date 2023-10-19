@@ -21,12 +21,31 @@
         <div
           class="row bg-body mx-auto rounded border p-2 mb-2"
           style="max-width: 1080px"
+          v-if="!songsExist"
         >
           <div class="hstack p-0">
             <div>
-              <h6 class="fw-normal m-0 fs-lg-5 fs-6">On the Road Again</h6>
+              <h6 class="fw-normal m-0 fs-lg-5 fs-6">No Songs Added Yet</h6>
               <small>
-                <p class="text-body-secondary m-0">Baba O Reily</p>
+                <p class="text-body-secondary m-0">Sample Artist</p>
+              </small>
+            </div>
+            <button class="ms-auto btn btn-danger btn-sm" v-if="ownership">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </div>
+        </div>
+        <div
+          class="row bg-body mx-auto rounded border p-2 mb-2"
+          style="max-width: 1080px"
+          v-for="song in playlist.songs"
+          :key="song.id"
+        >
+          <div class="hstack p-0">
+            <div>
+              <h6 class="fw-normal m-0 fs-lg-5 fs-6">{{ song.title }}</h6>
+              <small>
+                <p class="text-body-secondary m-0">{{ song.artist }}</p>
               </small>
             </div>
             <button class="ms-auto btn btn-danger btn-sm" v-if="ownership">
@@ -97,16 +116,9 @@ async function handleDelete() {
   router.push({ name: 'Home' })
 }
 
-// async function handleDelete() {
-//   isPending.value = true
-//   const res = await deleteDoc()
-//   isPending.value = false
-//   if (!error2.value) {
-//     console.log('playlist deleted')
-//     console.log(res)
-//     router.push({ name: 'Home' })
-//   }
-// }
+const songsExist = computed(() => {
+  return playlist.value.songs && playlist.value.songs.length > 0
+})
 </script>
 
 <style scoped>
