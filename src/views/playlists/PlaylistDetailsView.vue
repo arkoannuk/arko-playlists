@@ -6,10 +6,10 @@
     <div v-if="playlist">
       <div class="row bg-body mx-auto rounded border p-2" style="max-width: 1080px">
         <img
-          class="bg-body-tertiary rounded col col-md-4 px-0"
+          class="bg-body-tertiary rounded col-12 col-md-4 px-0"
           :src="playlist.coverUrl"
         />
-        <div class="col col-md-8 py-3 mb-lg-4 mt-md-auto ps-0 ps-md-4">
+        <div class="col-12 col-md-8 py-3 mb-lg-4 mt-md-auto ps-0 ps-md-4">
           <div class="hstack">
             <h1 class="fs-3 fs-lg-1">{{ playlist.title }}</h1>
           </div>

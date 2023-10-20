@@ -4,12 +4,13 @@ import LoginView from '../views/auth/LoginView.vue'
 import SignupView from '../views/auth/SignupView.vue'
 import CreatePlaylistView from '../views/playlists/CreatePlaylistView.vue'
 import PlaylistDetailsView from '../views/playlists/PlaylistDetailsView.vue'
+import UserPlaylistsView from '../views/playlists/UserPlaylistsView.vue'
 import { projectAuth } from '../firebase/config'
 
 // eslint-disable-next-line no-unused-vars
 function requireAuth(to, from) {
   let user = projectAuth.currentUser
-  if (!user) return { name: 'Home' }
+  if (!user) return { name: 'Login' }
 }
 
 function requireNoAuth() {
@@ -23,7 +24,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: HomeView
+      component: HomeView,
+      beforeEnter: requireAuth
     },
     {
       path: '/login',
@@ -47,9 +49,15 @@ const router = createRouter({
       path: '/playlists/:id',
       name: 'PlaylistDetails',
       component: PlaylistDetailsView,
-      // beforeEnter: requireAuth,
+      beforeEnter: requireAuth,
       props: true
       // Add alert: 'log in to view details'
+    },
+    {
+      path: '/playlists/user',
+      name: 'UserPlaylists',
+      component: UserPlaylistsView,
+      beforeEnter: requireAuth
     }
   ]
 })

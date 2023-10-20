@@ -71,7 +71,7 @@ async function handleSubmit() {
   await signup(email.value, password.value, username.value)
   if (!error.value) {
     console.log('user signed up')
-    router.push({ name: 'Home' })
+    router.push({ name: 'UserPlaylists' })
   }
 }
 </script>

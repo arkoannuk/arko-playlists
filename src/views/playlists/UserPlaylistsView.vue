@@ -32,11 +32,31 @@
       </div>
     </div>
   </div>
+
+  <div
+    class="position-fixed bottom-0 py-2 w-100 ps-md-0 bg-body-secondary border-top"
+    style="padding-left: 12px"
+  >
+    <div class="d-flex gap-2 justify-content-start justify-content-md-center">
+      <RouterLink
+        class="btn btn-success py-2"
+        style="min-width: 200px"
+        :to="{ name: 'Create' }"
+      >
+        <i class="bi bi-music-note-beamed px-1"></i> Add Playlist
+      </RouterLink>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import getCollection from '../composables/getCollection'
-const { error, documents } = getCollection('playlists')
+import getCollection from '@/composables/getCollection'
+import getUser from '@/composables/getUser'
+
+const { user } = getUser()
+const { error, documents } = getCollection('playlists', ['userId', '==', user.value.uid])
+
+// console.log(documents)
 </script>
 
 <style scoped>

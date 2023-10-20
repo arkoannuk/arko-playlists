@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-md bg-body-secondary border-bottom">
     <div class="container-fluid">
-      <RouterLink class="navbar-brand" :to="{ name: 'Home' }">Arko Playlists</RouterLink>
+      <RouterLink class="navbar-brand" :to="{ name: 'Home' }">Playlists</RouterLink>
       <button
         class="navbar-toggler"
         type="button"
@@ -15,15 +15,22 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav ms-auto gap-0 gap-md-3">
-          <RouterLink class="nav-link" active-class="active" :to="{ name: 'Home' }"
+          <!-- <RouterLink class="nav-link" active-class="active" :to="{ name: 'Home' }"
             >Home</RouterLink
-          >
+          > -->
           <RouterLink
             class="nav-link"
             active-class="active"
             :to="{ name: 'Create' }"
             v-if="user"
             >Create Playlist</RouterLink
+          >
+          <RouterLink
+            class="nav-link"
+            active-class="active"
+            :to="{ name: 'UserPlaylists' }"
+            v-if="user"
+            >My Playlists</RouterLink
           >
           <div class="nav-link" active-class="active" @click="handleClick" v-if="user">
             Logout
@@ -46,6 +53,9 @@
       </div>
     </div>
   </nav>
+  <p v-if="user" class="form-text text-center">
+    Logged in as <span class="fw-bold">{{ user.displayName }}</span>
+  </p>
 </template>
 
 <script setup>

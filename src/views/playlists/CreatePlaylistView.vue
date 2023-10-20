@@ -1,5 +1,5 @@
 <template>
-  <div class="container d-flex justify-content-center pt-5 mt-5">
+  <div class="container d-flex justify-content-center pt-3 mt-3">
     <main class="form-create w-100">
       <form @submit.prevent="handleSubmit">
         <h1 class="h3 mb-3 fw-normal">Create New Playlist</h1>
@@ -119,8 +119,8 @@ async function handleSubmit() {
     })
     isPending.value = false
     if (!error.value) {
-      console.log('playlist added')
-      console.log(res)
+      // console.log('playlist added')
+      // console.log(res)
       router.push({ name: 'PlaylistDetails', params: { id: res.id } })
     }
   }
