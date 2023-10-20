@@ -48,7 +48,11 @@
                 <p class="text-body-secondary m-0">{{ song.artist }}</p>
               </small>
             </div>
-            <button class="ms-auto btn btn-danger btn-sm" v-if="ownership">
+            <button
+              class="ms-auto btn btn-danger btn-sm"
+              v-if="ownership"
+              @click="handleSongDelete(song.id)"
+            >
               <i class="bi bi-trash-fill"></i>
             </button>
           </div>
@@ -73,7 +77,11 @@
       >
         <i class="bi bi-music-note"></i> Add
       </button>
-      <button class="btn btn-danger py-2" style="min-width: 98px" @click="handleDelete">
+      <button
+        class="btn btn-danger py-2"
+        style="min-width: 98px"
+        @click="handlePlaylistDelete"
+      >
         <i class="bi bi-trash-fill"></i> Playlist
       </button>
     </div>
@@ -95,7 +103,7 @@ const router = useRouter()
 const props = defineProps(['id'])
 const { user } = getUser()
 const { error, document: playlist } = getDocument('playlists', props.id)
-const { deleteDoc } = useDocument('playlists', props.id)
+const { deleteDoc, updateDoc } = useDocument('playlists', props.id)
 const { deleteImage } = useStorage()
 
 onMounted(() => {
@@ -110,7 +118,16 @@ const ownership = computed(() => {
   return playlist.value && user.value && user.value.uid === playlist.value.userId
 })
 
-async function handleDelete() {
+async function handleSongDelete(id) {
+  console.log(id)
+  const updatedSongs = playlist.value.songs.filter((song) => song.id !== id)
+  console.log(updatedSongs)
+  await updateDoc({
+    songs: updatedSongs
+  })
+}
+
+async function handlePlaylistDelete() {
   await deleteImage(playlist.value.filePath)
   await deleteDoc()
   router.push({ name: 'Home' })
