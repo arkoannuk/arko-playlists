@@ -1,9 +1,14 @@
 <template>
-  <div class="container pt-5 my-5">
-    <div v-if="error" class="text-center">
-      <p class="text-danger">{{ error }}</p>
+  <div class="container pt-3 my-3">
+    <div v-if="error" class="d-flex justify-content-center text-center mt-3 pt-3">
+      <div class="card p-4">
+        <p class="text-danger">{{ error }}</p>
+        <RouterLink :to="{ name: 'Home' }" class="btn btn-primary mt-3"
+          >Return Home</RouterLink
+        >
+      </div>
     </div>
-    <div v-if="playlist">
+    <div v-if="playlistExist">
       <div class="row bg-body mx-auto rounded border p-2" style="max-width: 1080px">
         <img
           class="bg-body-tertiary rounded col-12 col-md-4 px-0"
@@ -107,7 +112,10 @@ const { deleteDoc, updateDoc } = useDocument('playlists', props.id)
 const { deleteImage } = useStorage()
 
 onMounted(() => {
-  myModal.value = new bootstrap.Modal(document.getElementById('exampleModal'))
+  if (playlistExist.value) {
+    myModal.value = new bootstrap.Modal(document.getElementById('exampleModal'))
+    console.log(playlist)
+  }
 })
 
 function toggleModal() {
@@ -132,6 +140,10 @@ async function handlePlaylistDelete() {
   await deleteDoc()
   router.push({ name: 'Home' })
 }
+
+const playlistExist = computed(() => {
+  return playlist.value.id
+})
 
 const songsExist = computed(() => {
   return playlist.value.songs && playlist.value.songs.length > 0

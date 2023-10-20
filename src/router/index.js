@@ -4,6 +4,7 @@ import LoginView from '../views/auth/LoginView.vue'
 import SignupView from '../views/auth/SignupView.vue'
 import CreatePlaylistView from '../views/playlists/CreatePlaylistView.vue'
 import PlaylistDetailsView from '../views/playlists/PlaylistDetailsView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
 import UserPlaylistsView from '../views/playlists/UserPlaylistsView.vue'
 import { projectAuth } from '../firebase/config'
 
@@ -58,6 +59,11 @@ const router = createRouter({
       name: 'UserPlaylists',
       component: UserPlaylistsView,
       beforeEnter: requireAuth
+    },
+    // catchall 404
+    {
+      path: '/:catchAll(.*)',
+      component: NotFoundView
     }
   ]
 })

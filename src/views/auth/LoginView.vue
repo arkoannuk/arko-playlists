@@ -8,6 +8,7 @@
             type="email"
             class="form-control"
             id="loginEmail"
+            autocomplete="email"
             placeholder=""
             required
             v-model="email"
@@ -19,6 +20,7 @@
             type="password"
             class="form-control mb-2"
             id="loginPassword"
+            autocomplete="current-password"
             placeholder=""
             required
             v-model="password"
@@ -51,8 +53,8 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
 const router = useRouter()
-const email = ref('arkoannuk@gmail.com')
-const password = ref('arkoannuk')
+const email = ref('demo.user@gmail.com')
+const password = ref('demo.user')
 const { error, isPending, login } = useLogin()
 
 async function handleSubmit() {

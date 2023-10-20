@@ -8,6 +8,7 @@
             type="text"
             class="form-control"
             id="signupUsername"
+            autocomplete="username"
             placeholder=""
             required
             v-model="username"
@@ -19,6 +20,7 @@
             type="email"
             class="form-control"
             id="signupEmail"
+            autocomplete="email"
             placeholder=""
             required
             v-model="email"
@@ -30,6 +32,7 @@
             type="password"
             class="form-control mb-2"
             id="signupPassword"
+            autocomplete="current-password"
             placeholder=""
             required
             v-model="password"
@@ -62,9 +65,9 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
 const router = useRouter()
-const username = ref('arkoannuk')
-const email = ref('arkoannuk@gmail.com')
-const password = ref('arkoannuk')
+const username = ref('')
+const email = ref('')
+const password = ref('')
 const { error, isPending, signup } = useSignup()
 
 async function handleSubmit() {
