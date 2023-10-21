@@ -17,7 +17,7 @@ async function login(email, password) {
     }
     error.value = null
     isPending.value = false
-    console.log(user)
+    // console.log(user)
     return res
   } catch (err) {
     console.log(err.message)

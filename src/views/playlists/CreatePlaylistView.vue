@@ -42,7 +42,7 @@
         <button
           class="btn btn-primary w-100 py-2"
           type="submit"
-          :disabled="fileError"
+          :disabled="fileError || isDemoUser"
           v-if="!isPending"
         >
           Create
@@ -73,7 +73,7 @@ import useStorage from '@/composables/useStorage'
 import useCollection from '@/composables/useCollection'
 import getUser from '@/composables/getUser'
 import { timestamp } from '@/firebase/config'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const router = useRouter()
 const { filePath, url, uploadImage } = useStorage()
@@ -87,6 +87,10 @@ const description = ref(
 const file = ref(null)
 const fileError = ref(null)
 const isPending = ref(false)
+
+const isDemoUser = computed(() => {
+  return user.value.uid === '3q63qnzRfpezxqek2NrqgIsy9up1'
+})
 
 // allowed file types
 const types = ['image/png', 'image/jpeg', 'image/svg+xml']

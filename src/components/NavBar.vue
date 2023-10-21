@@ -32,7 +32,13 @@
             v-if="user"
             >My Playlists</RouterLink
           >
-          <div class="nav-link" active-class="active" @click="handleClick" v-if="user">
+          <div
+            type="button"
+            class="nav-link"
+            active-class="active"
+            @click="handleClick"
+            v-if="user"
+          >
             Logout
           </div>
           <RouterLink
@@ -53,9 +59,14 @@
       </div>
     </div>
   </nav>
-  <p v-if="user" class="form-text text-center">
+  <RouterLink
+    v-if="user"
+    :to="{}"
+    class="text-decoration-none form-text text-center"
+    style="pointer-events: none"
+  >
     Logged in as <span class="fw-bold">{{ user.displayName }}</span>
-  </p>
+  </RouterLink>
 </template>
 
 <script setup>
@@ -69,7 +80,7 @@ const { logout } = useLogout()
 
 async function handleClick() {
   await logout()
-  console.log('user logged out')
+  // console.log('user logged out')
   router.push({ name: 'Login' })
 }
 </script>

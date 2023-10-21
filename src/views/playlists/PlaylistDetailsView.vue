@@ -8,7 +8,7 @@
         >
       </div>
     </div>
-    <div v-if="playlistExist">
+    <div v-if="playlistExist && !error">
       <div class="row bg-body mx-auto rounded border p-2" style="max-width: 1080px">
         <img
           class="bg-body-tertiary rounded col-12 col-md-4 px-0"
@@ -35,7 +35,11 @@
                 <p class="text-body-secondary m-0">Sample Artist</p>
               </small>
             </div>
-            <button class="ms-auto btn btn-danger btn-sm" v-if="ownership">
+            <button
+              class="ms-auto btn btn-danger btn-sm"
+              v-if="ownership"
+              :disabled="isDemoUser"
+            >
               <i class="bi bi-trash-fill"></i>
             </button>
           </div>
@@ -57,13 +61,14 @@
               class="ms-auto btn btn-danger btn-sm"
               v-if="ownership"
               @click="handleSongDelete(song.id)"
+              :disabled="isDemoUser"
             >
               <i class="bi bi-trash-fill"></i>
             </button>
           </div>
         </div>
       </div>
-      <AddSong :playlist="playlist" @submit="toggleModal" />
+      <AddSong :playlist="playlist" />
     </div>
   </div>
 
@@ -78,7 +83,7 @@
         style="min-width: 98px"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
-        @click="showPopup"
+        :disabled="isDemoUser"
       >
         <i class="bi bi-music-note"></i> Add
       </button>
@@ -86,6 +91,7 @@
         class="btn btn-danger py-2"
         style="min-width: 98px"
         @click="handlePlaylistDelete"
+        :disabled="isDemoUser"
       >
         <i class="bi bi-trash-fill"></i> Playlist
       </button>
@@ -100,36 +106,26 @@ import useDocument from '@/composables/useDocument'
 import useStorage from '@/composables/useStorage'
 import getUser from '@/composables/getUser'
 import AddSong from '../../components/AddSong.vue'
-import { computed, onMounted, ref } from 'vue'
-import * as bootstrap from 'bootstrap'
+import { computed } from 'vue'
 
-const myModal = ref(null)
 const router = useRouter()
 const props = defineProps(['id'])
 const { user } = getUser()
 const { error, document: playlist } = getDocument('playlists', props.id)
 const { deleteDoc, updateDoc } = useDocument('playlists', props.id)
 const { deleteImage } = useStorage()
-
-onMounted(() => {
-  if (playlistExist.value) {
-    myModal.value = new bootstrap.Modal(document.getElementById('exampleModal'))
-    console.log(playlist)
-  }
+const isDemoUser = computed(() => {
+  return user.value.uid === '3q63qnzRfpezxqek2NrqgIsy9up1'
 })
-
-function toggleModal() {
-  myModal.value.toggle()
-}
 
 const ownership = computed(() => {
   return playlist.value && user.value && user.value.uid === playlist.value.userId
 })
 
 async function handleSongDelete(id) {
-  console.log(id)
+  // console.log(id)
   const updatedSongs = playlist.value.songs.filter((song) => song.id !== id)
-  console.log(updatedSongs)
+  // console.log(updatedSongs)
   await updateDoc({
     songs: updatedSongs
   })

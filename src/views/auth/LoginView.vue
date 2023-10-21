@@ -39,6 +39,17 @@
           <span role="status ms-2">Loading...</span>
         </button>
 
+        <p class="my-2 text-center">
+          No account yet?
+          <RouterLink
+            :to="{ name: 'Signup' }"
+            type="button"
+            class="text-primary text-decoration-underline fw-bold"
+            >Signup</RouterLink
+          >
+          instead!
+        </p>
+
         <div class="text-center form-text text-danger" role="alert" v-if="error">
           {{ error }}
         </div>
@@ -60,7 +71,7 @@ const { error, isPending, login } = useLogin()
 async function handleSubmit() {
   await login(email.value, password.value)
   if (!error.value) {
-    console.log('user logged in')
+    // console.log('user logged in')
     router.push({ name: 'UserPlaylists' })
   }
 }

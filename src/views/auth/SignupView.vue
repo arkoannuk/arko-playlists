@@ -39,18 +39,36 @@
           />
           <label for="signupPassword">Password</label>
         </div>
-        <button class="btn btn-primary w-100 py-2" type="submit" v-if="!isPending">
+        <button
+          class="btn btn-primary w-100 py-2"
+          type="submit"
+          v-if="!isPending"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-title="Tooltip on top"
+          disabled
+        >
           Sign up
         </button>
-        <button
-          class="btn btn-primary w-100 py-2 disabled"
-          type="button"
-          v-if="isPending"
-        >
+        <button class="btn btn-primary w-100 py-2" type="button" v-if="isPending">
           <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
           <span role="status ms-2">Loading...</span>
         </button>
 
+        <p class="my-2 text-center">
+          Already registered?
+          <RouterLink
+            :to="{ name: 'Login' }"
+            type="button"
+            class="text-primary text-decoration-underline fw-bold"
+            >Login</RouterLink
+          >
+          instead!
+        </p>
+
+        <div class="text-center form-text text-warning" role="alert">
+          Signup temporarily disabled to prevent misuse
+        </div>
         <div class="text-center form-text text-danger" role="alert" v-if="error">
           {{ error }}
         </div>
@@ -62,7 +80,7 @@
 <script setup>
 import useSignup from '@/composables/useSignup'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const router = useRouter()
 const username = ref('')
@@ -73,7 +91,7 @@ const { error, isPending, signup } = useSignup()
 async function handleSubmit() {
   await signup(email.value, password.value, username.value)
   if (!error.value) {
-    console.log('user signed up')
+    // console.log('user signed up')
     router.push({ name: 'UserPlaylists' })
   }
 }
