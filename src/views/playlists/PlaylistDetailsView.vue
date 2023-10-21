@@ -18,7 +18,9 @@
           <div class="hstack">
             <h1 class="fs-3 fs-lg-1">{{ playlist.title }}</h1>
           </div>
-          <p class="text-body-secondary">by {{ playlist.userName }} • 0 songs</p>
+          <p class="text-body-secondary">
+            by {{ playlist.userName }} • {{ playlist.songs.length }} songs
+          </p>
           <p>{{ playlist.description }}</p>
         </div>
       </div>

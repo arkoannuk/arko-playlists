@@ -72,7 +72,7 @@ async function handleSubmit() {
   await login(email.value, password.value)
   if (!error.value) {
     // console.log('user logged in')
-    router.push({ name: 'UserPlaylists' })
+    router.push({ name: 'Home' })
   }
 }
 </script>
