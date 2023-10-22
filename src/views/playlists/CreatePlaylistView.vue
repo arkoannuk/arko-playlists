@@ -80,10 +80,8 @@ const { filePath, url, uploadImage } = useStorage()
 const { error, addDoc } = useCollection('playlists')
 const { user } = getUser()
 
-const title = ref('90s Norwegian Family Folk')
-const description = ref(
-  `Experience lo-fi distorted magic by diving into the chilling legacy of early 90s Norwegian black metal with Mayhem, Burzum, and Darkthrone.`
-)
+const title = ref('')
+const description = ref(``)
 const file = ref(null)
 const fileError = ref(null)
 const isPending = ref(false)
