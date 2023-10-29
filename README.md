@@ -17,4 +17,4 @@ If I had more time, I would feature/change the following:
 - Vue.js
 - Firebase (Firestore, Authentication, Storage)
 
-![https://res.cloudinary.com/dgjfea9cb/image/upload/v1698144146/arko-playlists_zqx8z1.png](https://res.cloudinary.com/dgjfea9cb/image/upload/v1698144146/arko-playlists_zqx8z1.png)
+![project-image](https://res.cloudinary.com/dgjfea9cb/image/upload/v1698219600/arko-playlists_rwiqsk.png)
