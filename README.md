@@ -1,5 +1,7 @@
 # Playlists App
 [https://arko-playlists.web.app/](https://arko-playlists.web.app/)
+
+**NB! Signups are temporarily disabled to prevent misuse. Use the read-only demo account with autofilled credentials on the login page.**
 ## Introduction
 This app allows users to create and manage their own music playlists. Users can log in to their accounts, create new playlists, add songs, and upload images for playlist covers. Additionally, users can view playlists created by other users on the home page.
 
